@@ -1,0 +1,29 @@
+.strip-banner {
+    overflow: hidden; /* Ensure the zoom effect stays within bounds */
+    position: relative;
+    width: 100%;
+}
+
+.strip-banner img {
+    width: 93%;
+    height: auto;
+    transition: all 0.3s ease-in-out; /* Smooth transition for the effect */
+}
+
+.strip-banner:hover img {
+    transform: scale(1.03) rotate(0.6deg); /* More subtle zoom and tilt */
+}
+
+.strip-banner {
+    text-align: center;
+}
+.strip-text-btn {
+    position: absolute;
+    top: 26%;
+    right: 21%;
+}
+p.strip-text {
+    font-size: 22px;
+}
+
+

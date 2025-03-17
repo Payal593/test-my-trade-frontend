@@ -1,0 +1,44 @@
+.strategy-section {
+    display: flex;
+}
+
+.strategy-img img {
+    width: 80%;
+    height: auto;
+}
+.strategy-content {
+    height: 486px;
+    overflow-y: scroll;
+    direction: rtl;
+    text-align: left;
+    padding-left: 19px;
+}
+.strategy-img {
+    text-align: -webkit-center;
+}
+/* width */
+.strategy-content::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  .strategy-content::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px black; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  .strategy-content::-webkit-scrollbar-thumb {
+    background: var(--scroll-bg); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .strategy-content::-webkit-scrollbar-thumb:hover {
+    background: var(--scroll-bg); 
+  }
+
+  .reverse-strategy-section {
+    display: flex;
+    flex-direction: row-reverse;
+}

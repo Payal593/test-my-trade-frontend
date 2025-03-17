@@ -1,0 +1,200 @@
+/* Theme variables */
+:root[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --header-bg: #f0f0f0;
+    --scroll-bg: #000000;
+}
+
+:root[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --header-bg: #2d2d2d;
+    --scroll-bg: #ffffff;
+}
+
+/* Base styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: var(--header-bg);
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    
+}
+
+.text-center{
+    text-align: center;
+}   
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+main {
+    max-width: 1350px;
+    margin: 10rem auto;
+    padding: 0 1rem;
+    flex: 1;
+}
+
+/* Theme toggle button */
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+#theme-toggle .light-icon {
+    display: none;
+}
+
+#theme-toggle .dark-icon {
+    display: inline;
+}
+
+[data-theme="light"] #theme-toggle .light-icon {
+    display: inline;
+}
+
+[data-theme="light"] #theme-toggle .dark-icon {
+    display: none;
+}
+
+.btn-gradient {background-image: linear-gradient(to right, #007991 0%, #78ffd6  51%, #007991  100%)}
+.btn-gradient {
+    margin: 10px;
+    padding: 15px 45px;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    /* color: white; */
+    box-shadow: 0 0 20px #eee;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #eee;
+    border: 1px solid black;
+    color: black;
+ }
+
+ .btn-gradient:hover {
+   background-position: right center; /* change the direction of the change here */
+   /* color: #fff;  */
+   text-decoration: none;
+ }
+
+/* Footer Styles */
+.footer {
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    padding: 3rem 1rem 1rem;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.footer-section ul li a:hover {
+    opacity: 0.8;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icon {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    transition: transform 0.3s;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding-top: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Slider Styles */
+.swiper {
+    width: 100%;
+    padding: 30px 0;
+}
+
+.swiper-slide {
+    background: var(--header-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.swiper-slide:hover {
+    transform: scale(1.02);
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--text-color);
+}
+
+.swiper-pagination-bullet {
+    background: var(--text-color);
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--text-color);
+} 

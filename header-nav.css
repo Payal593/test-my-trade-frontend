@@ -1,0 +1,16 @@
+ul.nav-menu-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-btn {
+    /* box-shadow: none; */
+    padding: 11px 18px;
+    font-size: 14px;
+}
+.nav-btn a {
+    text-decoration: none;
+        color: black;
+}
+
