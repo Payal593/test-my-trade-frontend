@@ -22,4 +22,4 @@ jobs:
 
       - name: Upload files to S3
         run: |
-          aws s3 cp . s3://testmytrade.in --recursive
+          aws s3 cp . s3://testmytrade.in --recursive --acl public-read
