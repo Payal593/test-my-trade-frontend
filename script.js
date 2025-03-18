@@ -28,5 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // slider script 
 
+var swiper = new Swiper(".testimonial-swiper", {});
+
 
 // slider script end
