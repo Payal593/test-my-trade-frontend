@@ -49,3 +49,5 @@ jobs:
           kubectl config current-context  # Verify the context
           kubectl get pods
           helm upgrade --install frontend-service ./helm_frontend_chart --namespace=default
+          kubectl rollout restart deployment frontend-service -n default
+
