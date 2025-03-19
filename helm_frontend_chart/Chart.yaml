@@ -1,0 +1,7 @@
+# Chart.yaml
+apiVersion: v2
+name: frontend-service
+version: 0.1.0
+description: A Helm chart for frontend service
+
+dependencies: []

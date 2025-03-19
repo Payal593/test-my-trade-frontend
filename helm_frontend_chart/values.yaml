@@ -1,0 +1,19 @@
+# values.yaml
+replicaCount: 1
+image:
+  repository: sentdexcloud9/frontend-service
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  host: testmytrade.in
+
+env:
+  AWS_ACCESS_KEY_ID: "AKIAQXUIX6ZL45CWOUEG"
+  AWS_SECRET_ACCESS_KEY: "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"
+  AWS_DEFAULT_REGION: "us-east-1"
