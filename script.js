@@ -31,15 +31,28 @@ document.addEventListener('DOMContentLoaded', () => {
 var swiper = new Swiper(".testimonial-swiper", {
     spaceBetween: 30,
     slidesPerView: 2,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
     pagination: {
         el: ".swiper-pagination",
         clickable: true,
     },
     breakpoints: {
         640: {
+            slidesPerView: 2,
+        },
+        768: {
             slidesPerView: 1,
         },
+        1024: {
+            slidesPerView: 2,
+        },
     },
+    pagination: {
+        el: ".swiper-pagination",
+      },
 });
 
 
