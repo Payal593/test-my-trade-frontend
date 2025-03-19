@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="slider-code.css">
+    <link rel="stylesheet" href="strategy.css">
+    <link rel="stylesheet" href="banner.css">
+    <link rel="stylesheet" href="header-nav.css">
+    <link rel="stylesheet" href="testimonial.css">
+    <!-- Add Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <h1><a href="index.html">My Website</a></h1>
+            <div class="nav-menu">
+                <ul class="nav-menu-list">
+                    <li class="nav-btn"><a href="#">Home</a></li>
+                    <li class="nav-btn"><a href="#">Contact</a></li>
+                    <li class="btn-gradient nav-btn"><a href="main-backtest.html">Start Backtesting</a></li>
+                </ul>
+            </div>
+            <button id="theme-toggle">
+                <span class="light-icon">☀️</span>
+                <span class="dark-icon">🌙</span>
+            </button>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="upload-section">
+            <div class="file-upload-container">
+                <h2>Upload Trade Data</h2>
+                <div class="file-input-wrapper">
+                    <input type="file" id="csvFile" accept=".csv" class="file-input">
+                    <label for="csvFile" class="file-label">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Browse CSV File</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mapping-section" id="mappingSection" style="display: none;">
+                <h3>Map CSV Columns</h3>
+                <div class="mapping-options">
+                    <div class="mapping-item">
+                        <label for="qtySelect">Quantity:</label>
+                        <select id="qtySelect" class="mapping-select">
+                            <option value="">Select Column</option>
+                        </select>
+                    </div>
+                    <div class="mapping-item">
+                        <label for="buyPriceSelect">Buy Price:</label>
+                        <select id="buyPriceSelect" class="mapping-select">
+                            <option value="">Select Column</option>
+                        </select>
+                    </div>
+                    <div class="mapping-item">
+                        <label for="buyDateSelect">Buy Date:</label>
+                        <select id="buyDateSelect" class="mapping-select">
+                            <option value="">Select Column</option>
+                        </select>
+                    </div>
+                    <div class="mapping-item">
+                        <label for="sellPriceSelect">Sell Price:</label>
+                        <select id="sellPriceSelect" class="mapping-select">
+                            <option value="">Select Column</option>
+                        </select>
+                    </div>
+                    <div class="mapping-item">
+                        <label for="sellDateSelect">Sell Date:</label>
+                        <select id="sellDateSelect" class="mapping-select">
+                            <option value="">Select Column</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="submitMapping" class="submit-btn">Submit</button>
+            </div>
+        </div>
+
+        <style>
+            .upload-section {
+                max-width: 800px;
+                margin: 2rem auto;
+                padding: 2rem;
+                background: var(--bg-secondary);
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .file-upload-container {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            .file-input-wrapper {
+                position: relative;
+                margin-top: 1rem;
+            }
+
+            .file-input {
+                display: none;
+            }
+
+            .file-label {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 1rem 2rem;
+                background: var(--accent-color);
+                color: var(--text-color);
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .file-label:hover {
+                background: var(--accent-hover);
+            }
+
+            .mapping-section {
+                margin-top: 2rem;
+            }
+
+            .mapping-options {
+                display: grid;
+                gap: 1rem;
+                margin: 1.5rem 0;
+            }
+
+            .mapping-item {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .mapping-item label {
+                min-width: 100px;
+                font-weight: 500;
+            }
+
+            .mapping-select {
+                flex: 1;
+                padding: 0.5rem;
+                border: 1px solid var(--border-color);
+                border-radius: 5px;
+                background: var(--bg-primary);
+                color: var(--text-primary);
+            }
+
+            .submit-btn {
+                display: block;
+                width: 100%;
+                padding: 1rem;
+                background: var(--accent-color);
+                color: var(--text-color);
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: background-color 0.3s ease;
+            }
+
+            .submit-btn:hover {
+                background: var(--accent-hover);
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const fileInput = document.getElementById('csvFile');
+                const mappingSection = document.getElementById('mappingSection');
+                const selectElements = document.querySelectorAll('.mapping-select');
+                const submitBtn = document.getElementById('submitMapping');
+
+                fileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file && file.type === 'text/csv') {
+                        // Show mapping section
+                        mappingSection.style.display = 'block';
+                        
+                        // Read CSV headers and populate select options
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            const csv = event.target.result;
+                            const headers = csv.split('\n')[0].split(',').map(header => header.trim());
+                            
+                            selectElements.forEach(select => {
+                                // Clear existing options except the first one
+                                while (select.options.length > 1) {
+                                    select.remove(1);
+                                }
+                                
+                                // Add new options
+                                headers.forEach(header => {
+                                    const option = document.createElement('option');
+                                    option.value = header;
+                                    option.textContent = header;
+                                    select.appendChild(option);
+                                });
+                            });
+                        };
+                        reader.readAsText(file);
+                    } else {
+                        alert('Please select a valid CSV file');
+                        fileInput.value = '';
+                    }
+                });
+
+                submitBtn.addEventListener('click', function() {
+                    // Check if all mappings are selected
+                    const allSelected = Array.from(selectElements).every(select => select.value !== '');
+                    if (!allSelected) {
+                        alert('Please select all column mappings');
+                        return;
+                    }
+                    
+                    // Here you can handle the selected mappings
+                    const mappings = {
+                        qty: document.getElementById('qtySelect').value,
+                        buyPrice: document.getElementById('buyPriceSelect').value,
+                        buyDate: document.getElementById('buyDateSelect').value,
+                        sellPrice: document.getElementById('sellPriceSelect').value,
+                        sellDate: document.getElementById('sellDateSelect').value
+                    };
+                    
+                    console.log('Selected mappings:', mappings);
+                    // Add your processing logic here
+                });
+            });
+        </script>
+    </main>
+
+    <!-- Replace the empty footer with this content -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Company Info Section -->
+            <div class="footer-section">
+                <h3>About Company</h3>
+                <ul>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                    <li><a href="/faqs">FAQs</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Legal Section -->
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/cookie-policy">Cookie Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/disclaimer">Disclaimer</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media Section -->
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+
+

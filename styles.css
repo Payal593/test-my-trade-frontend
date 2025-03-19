@@ -53,7 +53,13 @@ main {
     padding: 0 1rem;
     flex: 1;
 }
-
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+option{
+    color: #000000;
+}
 /* Theme toggle button */
 #theme-toggle {
     background: none;
