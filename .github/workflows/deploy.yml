@@ -32,13 +32,21 @@ jobs:
           push: true
           tags: sentdexcloud9/frontend-service:latest
 
+
+
+      - name: Upload assets folder to S3 bucket
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set region us-east-1
+
+          aws s3 cp ./assets s3://testmytradeassets/assets --recursive
+          aws s3 ls s3://testmytradeassets/assets
+
       - name: Install Helm
         run: |
           curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
           helm version
-
-
-
 
       - name: Upgrade Helm deployment
         if: success()  # Runs only if the Kubernetes context setup succeeded
