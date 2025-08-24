@@ -36,7 +36,7 @@ var swiper = new Swiper(".testimonial-swiper", {
         disableOnInteraction: false,
     },
     pagination: {
-        el: ".swiper-pagination-custom",
+        el: ".swiper-pagination",
         clickable: true,
     },
     breakpoints: {
