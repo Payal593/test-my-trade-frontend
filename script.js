@@ -50,9 +50,6 @@ var swiper = new Swiper(".testimonial-swiper", {
             slidesPerView: 2,
         },
     },
-    pagination: {
-        el: ".swiper-pagination",
-      },
 });
 
 
