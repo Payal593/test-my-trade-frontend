@@ -1,3 +1,6 @@
+/* import Inter from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
 /* Theme variables */
 :root[data-theme="light"] {
     --bg-color: #ffffff;
@@ -19,7 +22,7 @@ body {
     padding: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     transition: background-color 0.3s, color 0.3s;
     min-height: 100vh;
     display: flex;
@@ -106,12 +109,14 @@ h1{
     box-shadow: 0 0 3px #eee;
     border: 1px solid black;
     color: black;
+    cursor: pointer;
  }
 
  .btn-gradient:hover {
    background-position: right center; /* change the direction of the change here */
    /* color: #fff;  */
    text-decoration: none;
+   cursor: pointer;
  }
 
 /* Footer Styles */
@@ -212,4 +217,4 @@ h1{
 
 .swiper-pagination-bullet-active {
     background: var(--text-color);
-} 
+}

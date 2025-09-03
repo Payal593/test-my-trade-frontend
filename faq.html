@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FAQ</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--accent:#2563eb;--muted:#6b7280}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);margin:0;padding:32px;color:#0f172a}
+    .container{max-width:820px;margin:0 auto}
+    h1{margin:0 0 20px;font-size:1.4rem}
+    .accordion{background:var(--card);border-radius:8px;padding:12px;box-shadow:0 6px 18px rgba(12,20,40,.06)}
+    .item{border-top:1px solid #eef2f7}
+    .item:first-child{border-top:0}
+    .trigger{display:flex;justify-content:space-between;align-items:center;width:100%;padding:14px;cursor:pointer;border:0;background:transparent;font-size:1rem;text-align:left}
+    .trigger:focus{outline:2px solid rgba(37,99,235,.18);outline-offset:2px}
+    .question{font-weight:600}
+    .meta{color:var(--muted);font-size:.9rem}
+    .chev{transition:transform .2s ease}
+    .chev.open{transform:rotate(180deg)}
+    .panel{padding:0 14px 16px 14px;color:#111827;line-height:1.5;display:none}
+    .panel.show{display:block}
+    small{color:var(--muted)}
+  </style>
+  <link rel="stylesheet" href="fonts.css">
+</head>
+<body>
+  
+  <main class="container">
+    <h1>Frequently Asked Questions</h1>
+    <div class="accordion" id="faqAccordion">
+      <div class="item">
+        <button class="trigger" aria-expanded="false" aria-controls="p1" id="q1">
+          <span class="question">1. How do I upload my trades CSV?</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div id="p1" class="panel" role="region" aria-labelledby="q1" aria-hidden="true">
+          Select the CSV file using the upload control on the Backtest page. After selecting, map the CSV columns to the required fields and click Submit.
+        </div>
+      </div>
+
+      <div class="item">
+        <button class="trigger" aria-expanded="false" aria-controls="p2" id="q2">
+          <span class="question">2. What CSV format is required?</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div id="p2" class="panel" role="region" aria-labelledby="q2" aria-hidden="true">
+          A header row is required. Columns should include quantity, buy/sell prices and buy/sell dates. You will map headers to these fields in the UI.
+        </div>
+      </div>
+
+      <div class="item">
+        <button class="trigger" aria-expanded="false" aria-controls="p3" id="q3">
+          <span class="question">3. Will my file be renamed when uploaded?</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div id="p3" class="panel" role="region" aria-labelledby="q3" aria-hidden="true">
+          Yes — the backend expects the upload target filename stock.csv. Your original filename is sent as metadata so it can be tracked.
+        </div>
+      </div>
+
+      <div class="item">
+        <button class="trigger" aria-expanded="false" aria-controls="p4" id="q4">
+          <span class="question">4. How is my identity handled?</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div id="p4" class="panel" role="region" aria-labelledby="q4" aria-hidden="true">
+          A short unique username is generated on the frontend and stored in sessionStorage. It is never set to the literal 'payal'.
+        </div>
+      </div>
+
+      <div class="item">
+        <button class="trigger" aria-expanded="false" aria-controls="p5" id="q5">
+          <span class="question">5. What if I selected wrong columns?</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div id="p5" class="panel" role="region" aria-labelledby="q5" aria-hidden="true">
+          You can change the mappings before clicking Submit. The UI disables options already chosen in other mapping selects to avoid duplicates.
+        </div>
+      </div>
+
+      <div class="item">
+        <button class="trigger" aria-expanded="false" aria-controls="p6" id="q6">
+          <span class="question">6. Who can I contact for more help?</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div id="p6" class="panel" role="region" aria-labelledby="q6" aria-hidden="true">
+          Use the Contact Us form available in the app to send a message. Include your username and a short description of the issue.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function(){
+      const accordion = document.getElementById('faqAccordion');
+      accordion.addEventListener('click', function(e){
+        const btn = e.target.closest('.trigger');
+        if(!btn) return;
+        const panelId = btn.getAttribute('aria-controls');
+        const panel = document.getElementById(panelId);
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        // close all
+        accordion.querySelectorAll('.trigger').forEach(t => {
+          t.setAttribute('aria-expanded','false');
+          t.querySelector('.chev').classList.remove('open');
+        });
+        accordion.querySelectorAll('.panel').forEach(p => {
+          p.classList.remove('show');
+          p.setAttribute('aria-hidden','true');
+        });
+
+        // toggle clicked
+        if(!isOpen){
+          btn.setAttribute('aria-expanded','true');
+          btn.querySelector('.chev').classList.add('open');
+          panel.classList.add('show');
+          panel.setAttribute('aria-hidden','false');
+          panel.focus && panel.focus();
+        }
+      });
+
+      // keyboard support (Enter / Space)
+      accordion.querySelectorAll('.trigger').forEach(btn => {
+        btn.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            btn.click();
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
